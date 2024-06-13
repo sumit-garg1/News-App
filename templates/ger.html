@@ -1,30 +1,95 @@
 {% extends "base.html" %}
 {% block body %}
 <style>
-    body{
+    body {
         padding: 1%;
+        background-color: #f0f0f0; /* Light gray background color */
     }
-    .img_div{
+    .img_div {
         margin: 3%;
     }
-    .newsbox{
+    .img_div img {
+        width: 100%; /* Make image take the full width of its container */
+        height: auto; /* Keep the aspect ratio */
+        max-width: 300px; /* Maximum width for larger screens */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+    }
+    .newsbox {
         display: flex;
-        border: 3px solid black;
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        border: 1px solid #ccc; /* Lighter border */
         margin: 1%;
+        background-color: white; /* White background for news boxes */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a raised effect */
+    }
+    .main_news {
+        padding: 1%;
+    }
+    .main_news h4 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+    }
+    .main_news h5 {
+        font-size: 1.2rem; /* Increased font size for content */
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .main_news a {
+        font-size: 1rem;
+        font-family: Arial, sans-serif;
+        color: blue;
+        text-decoration: underline;
+    }
+    .main_news h6 {
+        font-size: 0.9rem;
+        font-family: Arial, sans-serif;
+        color: gray;
+    }
+
+    /* Responsive design for larger screens */
+    @media (min-width: 768px) {
+        .newsbox {
+            flex-direction: row; /* Arrange elements in a row on larger screens */
+        }
+        .img_div {
+            flex: 1; /* Make the image container take equal space */
+        }
+        .main_news {
+            flex: 2; /* Make the news content container take more space */
+        }
+    }
+    .breaking-news-title {
+        color: red; /* Red color for the title */
+        font-size: 2rem; /* Font size for the title */
+        display: flex;
+        align-items: center;
+    }
+    .breaking-news-title img {
+        width: 100%; /* Make image take the full width of its container */
+        max-width: 300px; /* Maximum width for larger screens */
+        height: auto; /* Keep the aspect ratio */
+    }
+    @media (min-width: 768px) {
+        .breaking-news-title img {
+            max-width: 150px; /* Larger width for bigger screens */
+        }
     }
 </style>
-    <h1>Today's news</h1>
+    <h1 class="breaking-news-title">
+        <img src="/static/breakingnews.avif" alt="Breaking News">
+        Breaking News
+    </h1>
     {% for news in cases.articles %}
         <div class="newsbox">
             <div class="img_div">
-                <img src="{{news.urlToImage}}" alt="no image found" height="270rem" >
+                <img src="{{news.urlToImage}}" alt="no image found">
             </div>
             <div class="main_news">
                 <h4>{{news.title}}</h4>
-                <h5>Content:- {{news.content}}</h5>
+                <h5>Content: {{news.content}}</h5>
                 <a href="{{news.url}}">Read More</a>
                 <h6>{{news.description}}</h6>
-                <h6>Publish Date:-{{news.publishedAt}}</h6>
+                <h6>Publish Date: {{news.publishedAt}}</h6>
             </div>
         </div>
     {% endfor %}

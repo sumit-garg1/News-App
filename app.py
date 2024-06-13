@@ -66,7 +66,7 @@ def ger():
 
 @app.route("/bit_coin")
 def bit():
-    url="https://newsapi.org/v2/everything?q=bitcoin&apiKey=297b5aed463049be809ea5684acedf26"
+    url="https://newsapi.org/v2/everything?q=bitcoin&from=2024-06-04&to=2024-06-05&apiKey=297b5aed463049be809ea5684acedf26"
     r=requests.get(url).json()
     case={
         "articles":r["articles"]
@@ -84,7 +84,7 @@ def apple():
 
 @app.route("/tech")
 def tech():
-    url="https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=297b5aed463049be809ea5684acedf26"
+    url="https://newsapi.org/v2/everything?category=technology&apiKey=297b5aed463049be809ea5684acedf26"
     r=requests.get(url).json()
     case={
         "articles":r["articles"]
