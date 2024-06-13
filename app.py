@@ -84,7 +84,7 @@ def apple():
 
 @app.route("/tech")
 def tech():
-    url="https://newsapi.org/v2/everything?category=technology&apiKey=297b5aed463049be809ea5684acedf26"
+    url="https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=297b5aed463049be809ea5684acedf26"
     r=requests.get(url).json()
     case={
         "articles":r["articles"]
