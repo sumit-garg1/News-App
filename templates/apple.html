@@ -59,16 +59,13 @@
         }
     }
     .breaking-news-title {
-        color: red; /* Red color for the title */
+        color: blue; /* Red color for the title */
         font-size: 2rem; /* Font size for the title */
         display: flex;
         align-items: center;
+        margin-left: 10px;
     }
-    .breaking-news-title img {
-        width: 100%; /* Make image take the full width of its container */
-        max-width: 300px; /* Maximum width for larger screens */
-        height: auto; /* Keep the aspect ratio */
-    }
+
     @media (min-width: 768px) {
         .breaking-news-title img {
             max-width: 150px; /* Larger width for bigger screens */
@@ -76,8 +73,7 @@
     }
 </style>
     <h1 class="breaking-news-title">
-        <img src="/static/breakingnews.avif" alt="Breaking News">
-        Breaking News
+        News App
     </h1>
     {% for news in cases.articles %}
         <div class="newsbox">

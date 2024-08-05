@@ -1,5 +1,6 @@
 from flask import Flask,render_template
 import requests
+from datetime import datetime,timedelta
 app = Flask(__name__)
 app.secret_key = "secret key"
 @app.route("/")
@@ -66,31 +67,51 @@ def ger():
 
 @app.route("/bit_coin")
 def bit():
-    url="https://newsapi.org/v2/everything?q=bitcoin&from=2024-06-04&to=2024-06-05&apiKey=297b5aed463049be809ea5684acedf26"
-    r=requests.get(url).json()
-    case={
-        "articles":r["articles"]
+    # Get today's date
+    today = datetime.now()
+    # Get the date for the previous day
+    previous_day = today - timedelta(days=1)
+
+    # Format dates as YYYY-MM-DD
+    previous_day_str = previous_day.strftime('%Y-%m-%d')
+
+    # Set the date range to the previous day
+    url = f"https://newsapi.org/v2/everything?q=bitcoin&from={previous_day_str}&to={previous_day_str}&sortBy=popularity&apiKey=297b5aed463049be809ea5684acedf26"
+    r = requests.get(url).json()
+
+    case = {
+        "articles": r["articles"]
     }
-    return render_template('bit.html',cases=case)
+    return render_template('bit.html', cases=case)
+
 
 @app.route("/apple")
 def apple():
-    url="https://newsapi.org/v2/everything?q=apple&sortBy=popularity&apiKey=297b5aed463049be809ea5684acedf26"
-    r=requests.get(url).json()
-    case={
-        "articles":r["articles"]
+    today = datetime.now()
+    previous_day = today - timedelta(days=1)
+    previous_day_str = previous_day.strftime('%Y-%m-%d')
+
+    url = f"https://newsapi.org/v2/everything?q=apple&from={previous_day_str}&to={previous_day_str}&sortBy=popularity&apiKey=297b5aed463049be809ea5684acedf26"
+    r = requests.get(url).json()
+
+    case = {
+        "articles": r["articles"]
     }
-    return render_template('apple.html',cases=case)
+    return render_template('apple.html', cases=case)
+
 
 @app.route("/tech")
 def tech():
-    url="https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=297b5aed463049be809ea5684acedf26"
-    r=requests.get(url).json()
-    case={
-        "articles":r["articles"]
+    today = datetime.now()
+    previous_day = today - timedelta(days=1)
+    previous_day_str = previous_day.strftime('%Y-%m-%d')
+
+    url = f"https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&from={previous_day_str}&to={previous_day_str}&apiKey=297b5aed463049be809ea5684acedf26"
+    r = requests.get(url).json()
+
+    case = {
+        "articles": r["articles"]
     }
-    return render_template('tech.html',cases=case)
-
-
+    return render_template('tech.html', cases=case)
 if __name__== "__main__":
     app.run(debug=True) 
